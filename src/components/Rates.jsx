@@ -5,7 +5,7 @@ export default function Rates() {
         Rates
       </h2>
       <p className="text-gray-700 mb-4 text-center">
-        Here are the current rates for our services:
+        Here are the current rate:
       </p>
       <table className="w-full border-collapse border border-blue-200">
         <thead>
@@ -25,22 +25,6 @@ export default function Rates() {
             </td>
             <td className="border border-blue-200 px-4 py-2 text-gray-800">
               5 minutes
-            </td>
-          </tr>
-          <tr className="hover:bg-yellow-100">
-            <td className="border border-blue-200 px-4 py-2 text-gray-800">
-              ₱5.00
-            </td>
-            <td className="border border-blue-200 px-4 py-2 text-gray-800">
-              30 minutes
-            </td>
-          </tr>
-          <tr className="hover:bg-yellow-100">
-            <td className="border border-blue-200 px-4 py-2 text-gray-800">
-              ₱10.00
-            </td>
-            <td className="border border-blue-200 px-4 py-2 text-gray-800">
-              60 minutes
             </td>
           </tr>
         </tbody>
