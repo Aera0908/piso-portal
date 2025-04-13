@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "src": "/cdm_logo.png",
+    "alt": "CDM Logo"
+  },
+  {
+    "id": 2,
+    "src": "/placeholder1.jpg",
+    "alt": "School Building"
+  },
+  {
+    "id": 3,
+    "src": "/placeholder2.jpg",
+    "alt": "School Grounds"
+  },
+  {
+    "id": 4,
+    "src": "/placeholder3.jpg",
+    "alt": "Classroom"
+  }
+]
