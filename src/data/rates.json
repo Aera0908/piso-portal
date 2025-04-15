@@ -6,7 +6,7 @@
     "time": 180,
     "description": "For quick browsing",
     "badge": "Quick",
-    "badgeColor": "bg-yellow-100 text-yellow-700"
+    "badgeColor": "bg-green-100 text-green-700"
   },
   {
     "duration": "25 Minutes",
@@ -25,6 +25,15 @@
     "description": "For longer browsing",
     "badge": "Premium",
     "badgeColor": "bg-purple-100 text-purple-700"
+  },
+  {
+    "duration": "150 Minutes",
+    "price": "₱20",
+    "value": 20, 
+    "time": 9000,
+    "description": "magbabatak?",
+    "badge": "Super Premium",
+    "badgeColor": "bg-yellow-100 text-yellow-700"
   }
 ]
 

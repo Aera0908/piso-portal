@@ -9,11 +9,16 @@
   height: 100vh;
 }
 
-/* Hide scrollbar */
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
+/* Custom Scrollbar Styling */
+.rates-carousel::-webkit-scrollbar {
+  height: 8px; /* Adjust the height of the scrollbar */
 }
-.scrollbar-hide {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+
+.rates-carousel::-webkit-scrollbar-thumb {
+  background-color: #373e4d; /* Blue color for the scrollbar thumb */
+  border-radius: 10px; /* Rounded corners for the thumb */
+}
+
+.rates-carousel::-webkit-scrollbar-track {
+  background: transparent; /* Transparent track */
 }

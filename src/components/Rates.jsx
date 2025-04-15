@@ -14,7 +14,7 @@ export default function Rates() {
       <h2 className="text-2xl font-bold text-blue-700 text-center mb-6">
         Rates
       </h2>
-      <div className="flex overflow-x-auto space-x-4 scrollbar-hide">
+      <div className="flex overflow-x-auto space-x-4 scrollbar-thin scrollbar-thumb-blue-700 scrollbar-track-transparent">
         {rates.map((rate, index) => (
           <div
             key={index}
