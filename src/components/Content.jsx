@@ -1,5 +1,6 @@
 import Rates from "./Rates.jsx";
 import React, { useState, useEffect } from "react";
+import coupons from "../data/coupons.json"; // Import the JSON file
 
 export default function Content() {
   const [code, setCode] = useState(["", "", "", "", "", ""]);
@@ -7,14 +8,6 @@ export default function Content() {
   const [remainingTime, setRemainingTime] = useState(null);
   const [timeLeft, setTimeLeft] = useState(0); // Time left in seconds
   const [isTimeUp, setIsTimeUp] = useState(false); // Tracks if time is up
-
-  // Placeholder coupon with its value
-  const coupons = {
-    111111: 15.0, // ₱15.00
-    222222: 30.0, // ₱30.00
-    333333: 1.0, // ₱1.00
-    444444: 0.1, // ₱0.10
-  };
 
   // Function to calculate time based on money
   const calculateTime = (amount) => {
@@ -31,6 +24,12 @@ export default function Content() {
   const loadFromLocalStorage = (key) => {
     const value = localStorage.getItem(key);
     return value ? JSON.parse(value) : null;
+  };
+
+  // Remove coupon from JSON
+  const removeCoupon = (couponCode) => {
+    delete coupons[couponCode]; // Remove the coupon from the object
+    console.log(`Coupon ${couponCode} has been removed.`);
   };
 
   // Load saved data on component mount
@@ -61,14 +60,16 @@ export default function Content() {
       return () => clearInterval(timer); // Cleanup timer
     } else if (timeLeft === 0 && isVerified) {
       setIsTimeUp(true); // Trigger time-up state
+      removeCoupon(code.join("")); // Remove the coupon from the JSON
       localStorage.clear(); // Clear localStorage when time is up
     }
   }, [timeLeft, isVerified]);
 
   const handleInputChange = (value, index) => {
-    if (/^[A-Z0-9]?$/.test(value)) {
+    if (/^[a-zA-Z0-9]?$/.test(value)) {
+      // Allow letters and numbers
       const newCode = [...code];
-      newCode[index] = value.toUpperCase();
+      newCode[index] = value.toUpperCase(); // Convert to uppercase
       setCode(newCode);
 
       // Automatically focus the next input
@@ -217,9 +218,16 @@ export default function Content() {
               </div>
             </div>
           )}
-          {isTimeUp && <p className="text-red-500">Your session has ended.</p>}
-          {!isTimeUp && (
-            <p className="text-gray-500">Enjoy your internet connection!</p>
+          {isTimeUp && (
+            <div>
+              <p className="text-red-500 mb-4">Your session has ended.</p>
+              <button
+                onClick={handleReset}
+                className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition duration-200"
+              >
+                Enter New Coupon
+              </button>
+            </div>
           )}
         </div>
       )}

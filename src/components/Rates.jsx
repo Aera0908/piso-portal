@@ -2,7 +2,7 @@ export default function Rates() {
   return (
     <div className="rates bg-blue-50 p-6 rounded shadow-md max-w-md mx-auto">
       <h2 className="text-2xl font-bold text-blue-700 mb-4 text-center">
-        Rates
+        Rate
       </h2>
       <p className="text-gray-700 mb-4 text-center">
         Here are the current rate:
