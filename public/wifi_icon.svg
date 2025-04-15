@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
+  <!-- Gradient Background -->
+  <defs>
+    <radialGradient id="blueGradient" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#2563eb"/>
+      <stop offset="100%" stop-color="#1e40af"/>
+    </radialGradient>
+  </defs>
+  <circle cx="100" cy="100" r="80" fill="url(#blueGradient)" />
+
+  <!-- Bigger WiFi Waves -->
+  <path d="M50 85 C 75 60, 125 60, 150 85" stroke="#fbbf24" stroke-width="10" fill="none" stroke-linecap="round"/>
+  <path d="M65 105 C 85 85, 115 85, 135 105" stroke="#fbbf24" stroke-width="10" fill="none" stroke-linecap="round"/>
+  <path d="M80 125 C 90 115, 110 115, 120 125" stroke="#fbbf24" stroke-width="10" fill="none" stroke-linecap="round"/>
+
+  <!-- Bigger Center Dot -->
+  <circle cx="100" cy="140" r="8" fill="#fbbf24"/>
+</svg>

@@ -1,0 +1,30 @@
+[
+  {
+    "duration": "3 Minutes",
+    "price": "₱1",
+    "value": 1, 
+    "time": 180,
+    "description": "For quick browsing",
+    "badge": "Quick",
+    "badgeColor": "bg-yellow-100 text-yellow-700"
+  },
+  {
+    "duration": "25 Minutes",
+    "price": "₱5",
+    "value": 5, 
+    "time": 1500,
+    "description": "Standard usage",
+    "badge": "Standard",
+    "badgeColor": "bg-blue-100 text-blue-700"
+  },
+  {
+    "duration": "60 Minutes",
+    "price": "₱10",
+    "value": 10, 
+    "time": 3600,
+    "description": "For longer browsing",
+    "badge": "Premium",
+    "badgeColor": "bg-purple-100 text-purple-700"
+  }
+]
+

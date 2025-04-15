@@ -1,37 +1,53 @@
+import { useState, useEffect } from "react";
+import ratesData from "../data/rates.json"; // Import rates.json
+
 export default function Rates() {
+  const [rates, setRates] = useState([]);
+
+  useEffect(() => {
+    // Load rates from the JSON file
+    setRates(ratesData);
+  }, []);
+
   return (
-    <div className="rates bg-blue-50 p-6 rounded shadow-md max-w-md mx-auto">
-      <h2 className="text-2xl font-bold text-blue-700 mb-4 text-center">
-        Rate
+    <div className="rates-carousel p-6 max-w-4xl mx-auto">
+      <h2 className="text-2xl font-bold text-blue-700 text-center mb-6">
+        Rates
       </h2>
-      <p className="text-gray-700 mb-4 text-center">
-        Here are the current rate:
-      </p>
-      <table className="w-full border-collapse border border-blue-200">
-        <thead>
-          <tr className="bg-blue-100">
-            <th className="border border-blue-200 px-4 py-2 text-blue-700">
-              Amount
-            </th>
-            <th className="border border-blue-200 px-4 py-2 text-blue-700">
-              Duration
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr className="hover:bg-yellow-100">
-            <td className="border border-blue-200 px-4 py-2 text-gray-800">
-              ₱1.00
-            </td>
-            <td className="border border-blue-200 px-4 py-2 text-gray-800">
-              5 minutes
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <p className="text-gray-700 mt-4 text-center">
-        For more information, please contact us.
-      </p>
+      <div className="flex overflow-x-auto space-x-4 scrollbar-hide">
+        {rates.map((rate, index) => (
+          <div
+            key={index}
+            className="flex-shrink-0 w-64 bg-white p-4 rounded-lg shadow-md border border-gray-200"
+          >
+            <div className="flex justify-between items-center mb-2">
+              <h3 className="text-lg font-bold text-blue-700">
+                {rate.duration}
+              </h3>
+              {rate.badge && (
+                <span
+                  className={`text-xs font-bold px-2 py-1 rounded-full ${rate.badgeColor}`}
+                >
+                  {rate.badge}
+                </span>
+              )}
+            </div>
+            <p className="text-3xl font-bold text-blue-700 text-left">
+              {rate.price}
+            </p>
+            <p className="text-sm text-gray-500 text-left">
+              {rate.description}
+            </p>
+            <div className="flex mt-4">
+              <img
+                src="/wifi_icon.svg"
+                alt="WiFi Icon"
+                className="h-6 w-6 ml-0"
+              />
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
