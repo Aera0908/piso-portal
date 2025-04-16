@@ -39,10 +39,12 @@ export default function Content() {
     return value ? JSON.parse(value) : null;
   };
 
-  // Remove coupon from JSON
-  const removeCoupon = (couponCode) => {
-    delete coupons[couponCode]; // Remove the coupon from the object
-    console.log(`Coupon ${couponCode} has been removed.`);
+  // Update coupon status in JSON
+  const updateCouponStatus = (couponCode, status) => {
+    if (coupons[couponCode]) {
+      coupons[couponCode].status = status; // Update the status
+      console.log(`Coupon ${couponCode} status updated to ${status}.`);
+    }
   };
 
   // Load saved data on component mount
@@ -73,7 +75,7 @@ export default function Content() {
       return () => clearInterval(timer); // Cleanup timer
     } else if (timeLeft === 0 && isVerified) {
       setIsTimeUp(true); // Trigger time-up state
-      removeCoupon(code.join("")); // Remove the coupon from the JSON
+      updateCouponStatus(code.join(""), "Unused"); // Reset coupon status to "Unused"
       localStorage.clear(); // Clear localStorage when time is up
     }
   }, [timeLeft, isVerified]);
@@ -101,13 +103,16 @@ export default function Content() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const enteredCode = code.join("");
-    if (coupons[enteredCode]) {
-      const value = coupons[enteredCode];
+    if (coupons[enteredCode] && coupons[enteredCode].status === "Unused") {
+      const value = coupons[enteredCode].value;
       setIsVerified(true);
       const totalTime = calculateTime(value);
       setRemainingTime(totalTime); // Set total time in seconds
       setTimeLeft(totalTime); // Start countdown
       setIsTimeUp(false); // Reset time-up state
+
+      // Update coupon status to "Active"
+      updateCouponStatus(enteredCode, "Active");
 
       // Save data to localStorage
       saveToLocalStorage("couponCode", enteredCode);
@@ -115,7 +120,11 @@ export default function Content() {
       saveToLocalStorage("remainingTime", totalTime);
       saveToLocalStorage("isVerified", true);
     } else {
-      alert("Invalid coupon code. Please try again.");
+      alert(
+        coupons[enteredCode]
+          ? "This coupon is already active or used."
+          : "Invalid coupon code. Please try again."
+      );
     }
   };
 
@@ -157,7 +166,7 @@ export default function Content() {
   };
 
   return (
-    <main className="flex-1 p-4 bg-white">
+    <main className="flex-1 p-4 bg-white min-h-screen">
       <h2 className="text-2xl font-bold mb-4 text-blue-700 mt-2 px-5 text-center">
         Welcome to Piso WiFi Portal
       </h2>

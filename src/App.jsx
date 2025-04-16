@@ -1,4 +1,6 @@
 import "./App.css";
+import Admin from "./components/Admin";
+import AdminDashboard from "./components/AdminDashboard";
 import Header from "./components/Header";
 import Content from "./components/Content";
 import Footer from "./components/Footer";
@@ -21,6 +23,8 @@ function App() {
           <Route path="/privacy" element={<PrivacyPolicy />} />{" "}
           {/* Privacy Policy */}
           <Route path="/help" element={<Help />} /> {/* Help Page */}
+          <Route path="/admin" element={<Admin />} /> {/* Admin Page */}
+          <Route path="/admin/dashboard" element={<AdminDashboard />} />
         </Routes>
         <Footer />
       </div>
