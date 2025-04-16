@@ -75,7 +75,7 @@ export default function Content() {
       return () => clearInterval(timer); // Cleanup timer
     } else if (timeLeft === 0 && isVerified) {
       setIsTimeUp(true); // Trigger time-up state
-      updateCouponStatus(code.join(""), "Unused"); // Reset coupon status to "Unused"
+      updateCouponStatus(code.join(""), "Expired"); // Mark coupon as expired
       localStorage.clear(); // Clear localStorage when time is up
     }
   }, [timeLeft, isVerified]);
@@ -103,28 +103,37 @@ export default function Content() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const enteredCode = code.join("");
-    if (coupons[enteredCode] && coupons[enteredCode].status === "Unused") {
-      const value = coupons[enteredCode].value;
-      setIsVerified(true);
-      const totalTime = calculateTime(value);
-      setRemainingTime(totalTime); // Set total time in seconds
-      setTimeLeft(totalTime); // Start countdown
-      setIsTimeUp(false); // Reset time-up state
+    const today = new Date().toISOString().split("T")[0]; // Get today's date in YYYY-MM-DD format
 
-      // Update coupon status to "Active"
-      updateCouponStatus(enteredCode, "Active");
+    if (coupons[enteredCode]) {
+      const coupon = coupons[enteredCode];
 
-      // Save data to localStorage
-      saveToLocalStorage("couponCode", enteredCode);
-      saveToLocalStorage("timeLeft", totalTime);
-      saveToLocalStorage("remainingTime", totalTime);
-      saveToLocalStorage("isVerified", true);
+      if (coupon.status === "Expired") {
+        alert("This coupon has already expired.");
+      } else if (coupon.date < today) {
+        alert("This coupon is no longer valid.");
+        updateCouponStatus(enteredCode, "Expired"); // Mark as expired
+      } else if (coupon.status === "Unused") {
+        const value = coupon.value;
+        setIsVerified(true);
+        const totalTime = calculateTime(value);
+        setRemainingTime(totalTime); // Set total time in seconds
+        setTimeLeft(totalTime); // Start countdown
+        setIsTimeUp(false); // Reset time-up state
+
+        // Update coupon status to "Active"
+        updateCouponStatus(enteredCode, "Active");
+
+        // Save data to localStorage
+        saveToLocalStorage("couponCode", enteredCode);
+        saveToLocalStorage("timeLeft", totalTime);
+        saveToLocalStorage("remainingTime", totalTime);
+        saveToLocalStorage("isVerified", true);
+      } else {
+        alert("This coupon is already active or used.");
+      }
     } else {
-      alert(
-        coupons[enteredCode]
-          ? "This coupon is already active or used."
-          : "Invalid coupon code. Please try again."
-      );
+      alert("Invalid coupon code. Please try again.");
     }
   };
 
